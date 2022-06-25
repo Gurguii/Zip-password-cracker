@@ -1,4 +1,3 @@
-# Zip password cracker
 ## How to use
 
 #### Clone the project (or just copy-paste)
