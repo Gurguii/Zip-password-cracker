@@ -3,7 +3,7 @@ import sys
 import signal
 import argparse
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(usage=f"python3 {sys.argv[0]} -f <zipfile> -w <wordlist>")
 parser.add_argument("-f","--file",metavar="",help="Zip file to crack",required=True)
 parser.add_argument("-w","--wordlist",metavar="",help="Wordlist to use",required=True)
 parser.add_argument("-l","--line",metavar="",type=int,help="Line to start at")
