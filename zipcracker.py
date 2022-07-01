@@ -11,7 +11,6 @@ args=parser.parse_args()
 
 def signal_handler(s,f):
     file.close()
-    print(f"\n[!]File closed at line {line} => {password.decode()}\n\n")
 
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -25,21 +24,24 @@ if args.line:
     line=args.line+1
 
 print("Press ctrl+c to stop")
-
-with open(wlist,'rb') as file:
-    if args.line:
-        for i in range(args.line):
-            next(file)
-    for password in file:
-        try:
-            zipObj.extractall(pwd=password.strip())
-            print(f"\n[!] Password found at line {line} => {password.decode()}")
-            done=True
-            break
-        except:
-            line+=1
-            continue
-
+try:
+    with open(wlist,'rb') as file:
+        if args.line:
+            for i in range(args.line):
+                next(file)
+        for password in file:
+            try:
+                zipObj.extractall(pwd=password.strip())
+                print(f"\n[!] Password found at line {line} => {password.decode()}")
+                done=True
+                break
+            except:
+                line+=1
+                continue
+except:
+    print("\n[-] Exiting ...")
+    print(f"\n[!]File closed at line {line} => {password.decode()}\n\n")
+    exit(0)
 if done:
     sys.exit(0)
 print("[-]Password not found")
